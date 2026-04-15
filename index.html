@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <title>Norma Translator</title>
+</head>
+<body>
+
+<h2>⚖️ Norma Translator</h2>
+
+<textarea id="text" rows="6" cols="50" placeholder="Заң мәтінін енгіз..."></textarea><br><br>
+
+<button onclick="send()">Түсіндіру</button>
+
+<p id="result"></p>
+
+<script>
+async function send() {
+    let text = document.getElementById("text").value;
+
+    let res = await fetch("https://norma-translator.onrender.com/translate", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ text })
+    });
+
+    let data = await res.json();
+    document.getElementById("result").innerText = data.result;
+}
+</script>
+
+</body>
+</html>
